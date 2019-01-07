@@ -129,11 +129,14 @@ if not wybor == "plmd":
                 q1(gracz)
                 q = 2
             print("Znajdujesz się w mieście.")
-            gdzie = input("Możesz udać się na polanę lub na pola lub do świątyni lub na tajemną drogę. Jaka jest twa decyzja? (polana/pola/swiatynia/droga) ")
+            gdzie = input("Możesz udać się na polanę lub na pola lub do świątyni lub na tajemną drogę lub do hazardzisty. Jaka jest twa decyzja? (polana/pola/swiatynia/droga/hazardzista) ")
             if gdzie=='polana':
                 gracz.xyz = 2
             elif gdzie=='pola' or gdzie=="pole":
                 gracz.xyz = 8
+            elif gdzie=='hazardzista':
+                hazard(gracz)
+                gracz.xyz = 6
             elif gdzie=='swiatynia':
                 if(zmienne['szata_biskupa']==True):
                     print('Dostrzegł cię biskup. Jest wściekły, że ubrałeś jego szaty i Cię przeklina. Gniew Boga Cię zabija ')

@@ -1,8 +1,8 @@
-hp: 100
+hp: 90
 jaskinia: true
-q: 1
+q: 2
 sfinks: 0
-sila: 1
+sila: 2
 super_moc: false
 szata_biskupa: false
-xyz: 12
+xyz: 6

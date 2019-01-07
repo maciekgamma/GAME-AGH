@@ -211,3 +211,15 @@ def getZmienne(key, zmienne):
         return zmienne['key']
     except Exception:
         return None
+
+def hazard(gracz):
+    print ('H: Witaj, przed tobą znajdują się trzy kubki, pod jednym z nich jest kamien. Jeśli zgadniesz pod którym, w nagronę otrzymasz punkty zdrowia, lecz jesli sie pomylisz, stracisz je.')
+    strzal = input ('\nWybieraj!(1/2/3)')
+    pkt = random.randint(0, 2)
+    if (strzal == pkt):
+            gracz.hp += 20
+            print ('Dobrze!\n')
+    else:
+            gracz.hp -=10
+            print ('Źle!\n')
+    print('H: Wystarczy na teraz. Żegnaj\n')
