@@ -191,3 +191,17 @@ def leczenie(gracz):
     else:
         print("Wściekły kapłan wyrzuca Cię za profanację")
 
+def wyjscie(hp, sila, xyz, jask, super, que):
+    pliczek = open("zapis.txt", "w")
+    nowe = [hp, sila, xyz, jask, super, que]
+    for i in range(len(nowe)):
+        pliczek.write(str(nowe[i])+"\n")
+    pliczek.close()
+    #do usuniecia, to tak dla sprawdzenia czy działa
+    pliczek = open("zapis.txt", "r")
+    print(pliczek.read())
+    pliczek.close()
+    #
+    print("Wychodzisz z gry")
+    time.sleep(5)
+    sys.exit()

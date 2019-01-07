@@ -2,31 +2,65 @@ from klasy import *
 from funkcje import *
 from klesty import *
 from zmienne import *
+import yaml
 
-print("Witaj w krainie Miałmland.\nRządzi nią okrutny dyktator, którego musisz pokonać. Czy podołasz wyzwaniu?")
+starting = input("Zacząć od nowa czy wczytać zapis? (nowy/wczytaj) ")
+if starting == "wczytaj":
+    try:
+        with open('save.yml', 'r') as stream:
+            zmienne=yaml.load(stream)
+        '''
+        staty = []
+        plik = open("zapis.txt", "r")
+        for i in plik:
+            staty.append(i)
+        plik.close()
+        '''
+    except Exception:
+        print('Wczytywanie nie udało się!')
+        zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1}
+else:
+    #staty = [100, 1, 1, "True", "False", 1] #1. HP; 2. Siła; 3. Lokacja; 4. Jaskinia; 5. Super moc; 6. Numer questa;
+    zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1}
+    print("Witaj w krainie Miałmland.\nRządzi nią okrutny dyktator, którego musisz pokonać. Czy podołasz wyzwaniu?")
 
 wybor = input("Naciśnij ENTER by rozpocząć przygodę! ")
 print(" ")
 
 if not wybor == "plmd":
-    gracz = Gracz()
+    gracz = Gracz(zmienne['hp'], zmienne['sila'], zmienne['xyz'])
     mob = Mob()
-    q = 1
-    jaskinia = True
-    super_moc = False
-    print("Na początek udaj się do miasta aby zakupić broń do walki z przeciwnikami.")
-    print("Zadanie: udaj się do miasta.")
+    q = int(zmienne['q'])
+    jaskinia=zmienne['jaskinia']
+    super_moc=zmienne['super_moc']
+    '''
+    if staty[3] == "True":
+        jaskinia = True
+        print("działa")
+    else:
+        jaskinia = False
+        print("nie działa")
+    if staty[4] == "False":
+        super_moc = False
+    else:
+        super_moc = True
+    '''
+
 
     while gracz:
         #jesli ciezko ranny to mozliwosc odpoczynku by sie wyleczyc
 
         if gracz.xyz == 1: #start
             print("Znajdujesz się na starcie.")
+            print("Na początek udaj się do miasta aby zakupić broń do walki z przeciwnikami.")
+            print("Zadanie: udaj się do miasta.")
             gdzie = input("Możesz udać się na polanę lub na ścieżkę do lasu. Jaka jest twa decyzja? (sciezka/polana) ")
             if gdzie=='polana':
                 gracz.xyz = 2
             elif gdzie=='sciezka':
                 gracz.xyz = 3
+            elif gdzie=='wyjscie':
+                wyjscie(gracz.hp, gracz.sila, gracz.xyz, jaskinia, super_moc, q)
             else:
                 print("Nie możesz udać się w to miejsce (sprawdź poprawność pisowni lub opcje przyjść na mapie).")
 
@@ -62,6 +96,7 @@ if not wybor == "plmd":
 
         elif gracz.xyz == 4: #las
             if szansa_na_sukces(gracz.xyz) == True and q > 2:
+                print('Coś wyskakuje zza drzewa i cię atakuje!')
                 walka(mob, gracz)
             if q == 2:
                 q2(gracz)
@@ -110,6 +145,7 @@ if not wybor == "plmd":
             pass
         elif gracz.xyz == 8: #pola pszenzyta
             if szansa_na_sukces(gracz.xyz) == True and q > 1:
+                print('Atakuje cię potwór')
                 walka(mob, gracz)
             print("Znajdujesz się na polach pszenżyta.")
             if jaskinia:
@@ -187,4 +223,14 @@ if not wybor == "plmd":
                 sys.exit()
 
         else:
+            pass
+        zmienne['xyz']=gracz.xyz
+        zmienne['hp']=gracz.hp
+        zmienne['q']=q
+        zmienne['jaskinia']=jaskinia
+        zmienne['super_moc']=super_moc
+        try:
+            with open('save.yml', 'w') as outfile:
+                yaml.dump(zmienne, outfile, default_flow_style=False)
+        except Exception:
             pass

@@ -3,16 +3,17 @@ from funkcje import *
 from zmienne import *
 
 class Gracz():
-    def __init__(self):
+    def __init__(self, hp, sila, xyz):
+        #self.lista = lista
         self.hp_max = GRACZ_HP_MAX
-        self.hp = self.hp_max
-        self.sila = 1
-        self.mana = 0
-        self.armor = 0
-        self.exp = 0
-        self.lvl = 1
-        self.xyz = 1
-        self.magia = 5 #wartosc wzmocnienia ataku po uzyciu spella
+        self.hp = int(hp)
+        self.sila = int(sila)
+        #self.mana = 0
+        #self.armor = 0
+        #self.exp = 0
+        #self.lvl = 1
+        self.xyz = int(xyz)
+        #self.magia = 5 #wartosc wzmocnienia ataku po uzyciu spella
 
     def info(self):
         pass
