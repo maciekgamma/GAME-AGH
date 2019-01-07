@@ -223,3 +223,16 @@ def hazard(gracz):
             gracz.hp -=10
             print ('Źle!\n')
     print('H: Wystarczy na teraz. Żegnaj\n')
+
+def handlarz(gracz):
+    print ('\nH: Witaj, jestem handlarzem! Mam do zaoferowania Ci ciekawą ofertę. W zamian za jeden punkt Twojej siły jestem gotów dodać Ci 25 pkt do maksymalnego HP. Co Ty na to? Opowiedz tak/nie.')
+    if input()=='tak':
+      if gracz.sila>1:
+        gracz.hp_max += 25
+        gracz.sila -= 1
+        print("\nTwoje maksymalne hp wzrosło o 25. Twoja siła zmalała o 1.")
+        print ("Miło się z Tobą handluje.\n")
+      else:
+        print ("\nMasz niewystarczająco dużo siły. Przyjdź kiedy indziej.\n")
+    else:
+      "\nTwoja strata. Ha ha ha!\n"
