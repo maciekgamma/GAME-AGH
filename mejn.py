@@ -18,10 +18,10 @@ if starting == "wczytaj":
         '''
     except Exception:
         print('Wczytywanie nie udało się!')
-        zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1, 'szata_biskupa':False}
+        zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1, 'szata_biskupa':False, 'sfinks':0}
 else:
     #staty = [100, 1, 1, "True", "False", 1] #1. HP; 2. Siła; 3. Lokacja; 4. Jaskinia; 5. Super moc; 6. Numer questa;
-    zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1, 'szata_biskupa':False}
+    zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1, 'szata_biskupa':False, 'sfinks':0}
     print("Witaj w krainie Miałmland.\nRządzi nią okrutny dyktator, którego musisz pokonać. Czy podołasz wyzwaniu?")
 
 wybor = input("Naciśnij ENTER by rozpocząć przygodę! ")
@@ -114,11 +114,13 @@ if not wybor == "plmd":
             if szansa_na_sukces(gracz.xyz) == True and q > 1:
                 walka(mob, gracz)
             print("Znajdujesz się nad sadzawką, która niestety wyschła.")
-            gdzie = input("Możesz udać się na pola pszenżyta lub do lasu. Jaka jest twa decyzja? (pola/las) ")
+            gdzie = input("Możesz udać się na pola pszenżyta lub do lasu. Jaka jest twa decyzja? (pola/las/most) ")
             if gdzie=='pola' or gdzie=="pole":
                 gracz.xyz = 8
             elif gdzie=='las':
                 gracz.xyz = 4
+            elif gdzie=='most':
+                gracz.xyz = 12
             else:
                 print("Nie możesz udać się w to miejsce (sprawdź poprawność pisowni lub opcje przyjść na mapie).")
 
@@ -237,6 +239,39 @@ if not wybor == "plmd":
                       "POLEGŁEŚ! MIAŁMLAND POZOSTAŁ POD DYKTATURĄ JARKA NA WIEKI WIEKÓW!")
                 time.sleep(5)
                 sys.exit()
+
+        elif gracz.xyz==12:#most
+            if zmienne['sfinks']==0:
+                print('Zamierzasz przejść przez most, jednak drogę zagrodził ci Sfinks\n')
+                print('S: Jeśli odpowiesz na moją zagadkę, to pozwolę ci przejść przez most lub pomogę Ci kiedy będziesz mnie potrzebował.')
+                odp=input('S: Jeśli jednak się pomylisz to Cię zabiję. Podejmiesz wyzwanie? (tak/nie)')
+                if odp=='tak':
+                    odp=input('S: Co to za zwierzę obdarzone głosem, które z rana chodzi na czworakach, w południe na dwóch nogach, a wieczorem na trzech?')
+                    if odp=='człowiek':
+                        odp=input('S: Dobrze! Wybieraj: wolisz przejść przez most czy mam Ci pomóc kedy będziesz mnie potrzebował?(most/pomoc)')
+                        if odp=='most':
+                            print("Wchodzisz na most, jednak okazał się za słaby żeby Cię utrzymać. Spadasz w przepaść!\n"
+                                "POLEGŁEŚ! MIAŁMLAND POZOSTAŁ POD DYKTATURĄ JARKA NA WIEKI WIEKÓW!")
+                            time.sleep(5)
+                            sys.exit()
+                        else:
+                            print('S: Więc oczekuj mojej pomocy')
+                            print('Sfinks znika, a most się zapada. Wracasz nad sadzawkę.')
+                            zmienne['sfinks']=2
+                            gracz.xyz=5
+                    else:
+                        print("S: Odpowiedziałeś błędnie i musisz zginąć!\n"
+                              "POLEGŁEŚ! MIAŁMLAND POZOSTAŁ POD DYKTATURĄ JARKA NA WIEKI WIEKÓW!")
+                        time.sleep(5)
+                        sys.exit()
+
+                else:
+                    print('Most się zawala')
+                    zmienne['sfinks']==3
+            print('Most jest zepsuty. Nie możesz tu nic zrobić. Wracasz do sadzawki.')
+            gracz.xyz=5
+
+
 
         else:
             pass
