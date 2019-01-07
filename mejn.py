@@ -18,17 +18,17 @@ if starting == "wczytaj":
         '''
     except Exception:
         print('Wczytywanie nie udało się!')
-        zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1, 'szata_biskupa':False, 'sfinks':0, 'hp_max':100}
+        zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1, 'szata_biskupa':False, 'sfinks':0}
 else:
     #staty = [100, 1, 1, "True", "False", 1] #1. HP; 2. Siła; 3. Lokacja; 4. Jaskinia; 5. Super moc; 6. Numer questa;
-    zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1, 'szata_biskupa':False, 'sfinks':0, 'hp_max':100}
+    zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1, 'szata_biskupa':False, 'sfinks':0}
     print("Witaj w krainie Miałmland.\nRządzi nią okrutny dyktator, którego musisz pokonać. Czy podołasz wyzwaniu?")
 
 wybor = input("Naciśnij ENTER by rozpocząć przygodę! ")
 print(" ")
 
 if not wybor == "plmd":
-    gracz = Gracz(zmienne['hp'], zmienne['hp_max'], zmienne['sila'], zmienne['xyz'])
+    gracz = Gracz(zmienne['hp'], zmienne['sila'], zmienne['xyz'])
     mob = Mob()
     q = int(zmienne['q'])
     jaskinia=zmienne['jaskinia']
@@ -71,11 +71,15 @@ if not wybor == "plmd":
 
             #quest
 
-            gdzie = input("Możesz udać się do miasta lub na ścieżkę do lasu. Jaka jest twa decyzja? (miasto/sciezka) ")
+            gdzie = input("Możesz udać się do miasta, na ścieżkę do lasu lub do spotkanego na polanie handlarza. Jaka jest twa decyzja? (miasto/sciezka/handlarz) ")
             if gdzie=='miasto':
                 gracz.xyz = 6
             elif gdzie=='sciezka':
                 gracz.xyz = 3
+            elif gdzie=='handlarz':
+              handlarz(gracz)
+              gracz.xyz=2
+              
             else:
                 print("Nie możesz udać się w to miejsce (sprawdź poprawność pisowni lub opcje przyjść na mapie).")
 
@@ -203,11 +207,8 @@ if not wybor == "plmd":
             if q == 5:
                 print("Udało ci się dostać na drogę, jednak natknąłeś się na kota Adrianka, który strzeże mejścia do zamku.\n"
                       "Atakuje Cię!")
-                if zmienne['sfinks']==2:
-                    print('Pojawia się Sfinks, łapami chwyta Adrianka i odlatuje. Możesz Spokojnie udać się to zamku')
-                else:
-                    gracz.hp = walka(mob, gracz, "adrianek")
-                    print("Udało ci się pokonać kota Adrianka, udajesz się do zamku.")
+                gracz.hp = walka(mob, gracz, "adrianek")
+                print("Udało ci się pokonać kota Adrianka, udajesz się do zamku.")
                 gracz.xyz = 11
             else:
                 print("Ta droga jest zamknięta, spróbuj innym razem.")
@@ -287,7 +288,6 @@ if not wybor == "plmd":
         zmienne['jaskinia']=jaskinia
         zmienne['super_moc']=super_moc
         zmienne['sila']=gracz.sila
-        zmienne['hp_max']=gracz.hp_max
         try:
             with open('save.yml', 'w') as outfile:
                 yaml.dump(zmienne, outfile, default_flow_style=False)
