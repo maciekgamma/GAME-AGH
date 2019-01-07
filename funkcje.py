@@ -25,12 +25,12 @@ def walka(mob, gracz, *boss):
     mob.sila = 1
 
     if gracz.xyz == 11: #jesli walczymy z jarkiem
-        mob.hp = 1000
+        mob.hp = 2500
         mob.sila = 3
         jarek_ma_bica = True #zeby nie moc blokowac atakow jarka
 
     elif gracz.xyz == 10: #jesli walczymy z adriankiem
-        mob.hp = 300
+        mob.hp = 900
         mob.sila = 2
 
     print("\nWALKA!")

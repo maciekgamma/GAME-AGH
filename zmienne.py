@@ -3,6 +3,6 @@ GRACZ_ATAK = [10, 25]
 GRACZ_HP_MAX = 100
 LVL_UP_XP = list(map(lambda x: ((x**2) * 5), range(200)))
 
-MOB_HP_MAX = 70
+MOB_HP_MAX = 200
 
 ILE_EXP = 3

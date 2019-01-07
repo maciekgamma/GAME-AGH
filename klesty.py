@@ -3,17 +3,20 @@ from random import randrange
 from zmienne import *
 from funkcje import *
 
-def q1():
+def q1(gracz):
     print(" ")
-    print("Dotarłeś do miasta, czas na zakupy.\nAby kupić miecz (siła 1) wybierz 1.\n"
-          "Aby kupić topór (siła 1) wybierz 2.\nAby kupić młot (siła 1) wybierz 3.\n")
+    print("Dotarłeś do miasta, czas na zakupy.\nAby kupić miecz (Gra Trudna) wybierz 1.\n"
+          "Aby kupić topór (Gra Średnia) wybierz 2.\nAby kupić młot (Gra Łatwa) wybierz 3.\n")
     w = int(input("Którą broń wybierasz? "))
     if w == 1:
+        gracz.sila+=2
         print("Zakupiłeś miecz (siła 1). Świetny wybór.")
     elif w == 2:
-        print("Zakupiłeś miecz (siła 1). Świetny wybór.")
+        print("Zakupiłeś topór (siła 2). Świetny wybór.")
+        gracz.sila+=1
     elif w == 3:
-        print("Zakupiłeś miecz (siła 1). Świetny wybór.")
+        print("Zakupiłeś młot (siła 3). Świetny wybór.")
+        gracz.sila+=3
     else:
         print("Widzę, że podjęcie decyzji przerosło twoje możliwości, dlatego wybrałem za Ciebie.\n"
                 "Zakupiłeś gałąź sosny (siła 1).")
@@ -76,6 +79,3 @@ def q3(gracz):
         print("Okazało się, że grzyby te były magiczne.\nZyskałeś moc: widzenie w ciemności.") #zwiększyć siłę
         print("Zadanie: udaj się do jaskini.")
         print(" ")
-
-
-

@@ -124,7 +124,7 @@ if not wybor == "plmd":
 
         elif gracz.xyz == 6: #miasto
             if q == 1:
-                q1()
+                q1(gracz)
                 q = 2
             print("Znajdujesz się w mieście.")
             gdzie = input("Możesz udać się na polanę lub na pola lub do świątyni lub na tajemną drogę. Jaka jest twa decyzja? (polana/pola/swiatynia/droga) ")
@@ -152,6 +152,10 @@ if not wybor == "plmd":
             if(decyzja == 'tak'):
                 zmienne['szata_biskupa']=True
                 print('Fajnie na tobie wygląda!')
+            else:
+                print('Bóg pochwala to zachowanie i cię ulecza oraz zwiększa twoją siłę')
+                gracz.hp=gracz.hp_max
+                gracz.sila=gracz.sila+1
             print('Lepiej już stąd wyjść.\n')
             gracz.xyz=6
 
@@ -241,6 +245,7 @@ if not wybor == "plmd":
         zmienne['q']=q
         zmienne['jaskinia']=jaskinia
         zmienne['super_moc']=super_moc
+        zmienne['sila']=gracz.sila
         try:
             with open('save.yml', 'w') as outfile:
                 yaml.dump(zmienne, outfile, default_flow_style=False)
