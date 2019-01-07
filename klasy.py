@@ -3,9 +3,9 @@ from funkcje import *
 from zmienne import *
 
 class Gracz():
-    def __init__(self, hp, sila, xyz):
+    def __init__(self, hp, hp_max, sila, xyz):
         #self.lista = lista
-        self.hp_max = GRACZ_HP_MAX
+        self.hp_max = hp_max
         self.hp = int(hp)
         self.sila = int(sila)
         #self.mana = 0
