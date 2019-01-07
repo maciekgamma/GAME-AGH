@@ -18,10 +18,10 @@ if starting == "wczytaj":
         '''
     except Exception:
         print('Wczytywanie nie udało się!')
-        zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1}
+        zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1, 'szata_biskupa':False}
 else:
     #staty = [100, 1, 1, "True", "False", 1] #1. HP; 2. Siła; 3. Lokacja; 4. Jaskinia; 5. Super moc; 6. Numer questa;
-    zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1}
+    zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1, 'szata_biskupa':False}
     print("Witaj w krainie Miałmland.\nRządzi nią okrutny dyktator, którego musisz pokonać. Czy podołasz wyzwaniu?")
 
 wybor = input("Naciśnij ENTER by rozpocząć przygodę! ")
@@ -133,16 +133,28 @@ if not wybor == "plmd":
             elif gdzie=='pola' or gdzie=="pole":
                 gracz.xyz = 8
             elif gdzie=='swiatynia':
+                if(zmienne['szata_biskupa']==True):
+                    print('Dostrzegł cię biskup. Jest wściekły, że ubrałeś jego szaty i Cię przeklina. Gniew Boga Cię zabija ')
+                    print("POLEGŁEŚ! MIAŁMLAND POZOSTAŁ POD DYKTATURĄ JARKA NA WIEKI WIEKÓW!")
+                    time.sleep(5)
+                    sys.exit()
                 leczenie(gracz)
                 print("Twoje hp:", gracz.hp, "/", gracz.hp_max)
                 gracz.xyz = 6
             elif gdzie=='droga':
                 gracz.xyz = 10
             else:
-                print("Nie możesz udać się w to miejsce (sprawdź poprawność pisowni lub opcje przyjść na mapie).")
+                #print("Nie możesz udać się w to miejsce (sprawdź poprawność pisowni lub opcje przyjść na mapie).")
+                gracz.xyz=7
 
         elif gracz.xyz == 7: #swiatynia easter-egg
-            pass
+            decyzja= input('Przez przypadek wpadłeś do mieszkania biskupa i znalazłeś jego szatę. Chcesz ją założyć? (tak/nie)')
+            if(decyzja == 'tak'):
+                zmienne['szata_biskupa']=True
+                print('Fajnie na tobie wygląda!')
+            print('Lepiej już stąd wyjść.\n')
+            gracz.xyz=6
+
         elif gracz.xyz == 8: #pola pszenzyta
             if szansa_na_sukces(gracz.xyz) == True and q > 1:
                 print('Atakuje cię potwór')

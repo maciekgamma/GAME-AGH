@@ -191,7 +191,7 @@ def leczenie(gracz):
     else:
         print("Wściekły kapłan wyrzuca Cię za profanację")
 
-def wyjscie(hp, sila, xyz, jask, super, que):
+def wyjscie(hp, sila, xyz, jask, super, que):#nie używane
     pliczek = open("zapis.txt", "w")
     nowe = [hp, sila, xyz, jask, super, que]
     for i in range(len(nowe)):
@@ -205,3 +205,9 @@ def wyjscie(hp, sila, xyz, jask, super, que):
     print("Wychodzisz z gry")
     time.sleep(5)
     sys.exit()
+
+def getZmienne(key, zmienne):
+    try:
+        return zmienne['key']
+    except Exception:
+        return None
