@@ -18,17 +18,17 @@ if starting == "wczytaj":
         '''
     except Exception:
         print('Wczytywanie nie udało się!')
-        zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1, 'szata_biskupa':False, 'sfinks':0}
+        zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1, 'szata_biskupa':False, 'sfinks':0, 'hp_max':100}
 else:
     #staty = [100, 1, 1, "True", "False", 1] #1. HP; 2. Siła; 3. Lokacja; 4. Jaskinia; 5. Super moc; 6. Numer questa;
-    zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1, 'szata_biskupa':False, 'sfinks':0}
+    zmienne={'hp':100, 'sila':1,'xyz':1, 'jaskinia':True, 'super_moc':False, 'q':1, 'szata_biskupa':False, 'sfinks':0, 'hp_max':100}
     print("Witaj w krainie Miałmland.\nRządzi nią okrutny dyktator, którego musisz pokonać. Czy podołasz wyzwaniu?")
 
 wybor = input("Naciśnij ENTER by rozpocząć przygodę! ")
 print(" ")
 
 if not wybor == "plmd":
-    gracz = Gracz(zmienne['hp'], zmienne['sila'], zmienne['xyz'])
+    gracz = Gracz(zmienne['hp'], zmienne['hp_max'], zmienne['sila'], zmienne['xyz'])
     mob = Mob()
     q = int(zmienne['q'])
     jaskinia=zmienne['jaskinia']
@@ -79,7 +79,7 @@ if not wybor == "plmd":
             elif gdzie=='handlarz':
               handlarz(gracz)
               gracz.xyz=2
-              
+
             else:
                 print("Nie możesz udać się w to miejsce (sprawdź poprawność pisowni lub opcje przyjść na mapie).")
 
@@ -288,6 +288,7 @@ if not wybor == "plmd":
         zmienne['jaskinia']=jaskinia
         zmienne['super_moc']=super_moc
         zmienne['sila']=gracz.sila
+        zmienne['hp_max']=gracz.hp_max
         try:
             with open('save.yml', 'w') as outfile:
                 yaml.dump(zmienne, outfile, default_flow_style=False)
