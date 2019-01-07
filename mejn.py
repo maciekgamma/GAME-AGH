@@ -207,8 +207,11 @@ if not wybor == "plmd":
             if q == 5:
                 print("Udało ci się dostać na drogę, jednak natknąłeś się na kota Adrianka, który strzeże mejścia do zamku.\n"
                       "Atakuje Cię!")
-                gracz.hp = walka(mob, gracz, "adrianek")
-                print("Udało ci się pokonać kota Adrianka, udajesz się do zamku.")
+                if zmienne['sfinks']==2:
+                    print('Pojawia się Sfinks, łapami chwyta Adrianka i odlatuje. Możesz Spokojnie udać się to zamku')
+                else:
+                    gracz.hp = walka(mob, gracz, "adrianek")
+                    print("Udało ci się pokonać kota Adrianka, udajesz się do zamku.")
                 gracz.xyz = 11
             else:
                 print("Ta droga jest zamknięta, spróbuj innym razem.")
